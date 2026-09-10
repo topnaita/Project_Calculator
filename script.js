@@ -11,21 +11,21 @@ For example, 3 + 5. Create three variables, one for each part of the operation.
 You’ll use these variables to update your display later.
 */
 
-const add = function (num1, operator, num2) {
+const add = function (num1, num2) {
   const sum = num1 + num2;
   return sum;
 };
-const subtract = function (num1, num2, operator) {
+const subtract = function (num1, num2) {
   const subs = num1 - num2;
   return subs;
 };
 
-const multi = function (num1, num2, operator) {
+const multi = function (num1, num2) {
   const multi = num1 * num2;
   return multi;
 };
 
-const div = function (num1, num2, operator) {
+const div = function (num1, num2) {
   const division = num1 / num2;
   return division;
 };
@@ -34,46 +34,38 @@ const div = function (num1, num2, operator) {
  and two numbers and then calls one of the above 
  functions on the numbers.*/
 
-function operate(operator, numbOne, numbTwo) {
+function operate(numbOne, operator, numbTwo) {
   return operator(numbOne, numbTwo);
+  // return operator(numbOne, numbTwo);
 }
 
-// console.log(operate(multi, 10, 20));
-
+console.log(operate(5, multi, 2));
 /* Create the functions that update one of your number variables when the calculator’s
  digit buttons are clicked. Your calculator’s display should also update
  to reflect the value of that number variable.*/
 
-//  Num variables ----
-const btns = document.querySelectorAll("button");
+// Calculator Logic
 const container = document.querySelector(".container");
+// const btns = document.querySelectorAll("button");
 const calDisplay = document.querySelector(".display");
-const operatorSUM = document.querySelector(".oprSum");
-const operatorResult = document.querySelector(".itemResult");
+const numDigit = document.querySelectorAll(".num");
+// const btnOperations = document.querySelectorAll("button");
+const operatorSUM = document.querySelector(".add");
 
-btns.forEach((button) => {
-  button.addEventListener(
-    "click",
-    () => (button.id, (calDisplay.textContent = `${button.id}`)),
-  );
+const equal = document.querySelector(".equal");
+
+let firstValue = 0;
+let SecondValue = 0;
+
+numDigit.forEach((num) => {
+  num.addEventListener("click", () => {
+    (num.id, (calDisplay.textContent = `${num.id}`));
+  });
 });
 
-// btn2.addEventListener(
-//   "click",
-//   () => ((two = 2), (calDisplay.textContent = `${two}`)),
-// );
-
-// operatorSUM.addEventListener("click", add(e));
-
-// operatorResult.addEventListener(
-//   "click",
-//   () => (
-//     operate(operatorSUM, btn1, btn2),
-//     (calDisplay.textContent = `${operate}`)
-//   ),
-// );
-
-// operatorResult.addEventListener("click",()=>)
+equal.addEventListener("click", () => {
+  operate(firstValue, SecondValue);
+});
 
 /*Make the calculator work! You’ll need to store the first and second numbers input 
 by the user and then operate() on them when the user presses the = button, 
