@@ -11,6 +11,10 @@ For example, 3 + 5. Create three variables, one for each part of the operation.
 You’ll use these variables to update your display later.
 */
 
+let firstValue = "";
+let SecondValue = "";
+let operator = "";
+
 const add = function (num1, num2) {
   const sum = num1 + num2;
   return sum;
@@ -29,43 +33,45 @@ const div = function (num1, num2) {
   const division = num1 / num2;
   return division;
 };
+function operate(numbOne, operator, numbTwo) {
+  return operator(numbOne, numbTwo);
+}
 
 /* Create a new function "operate" that takes an operator 
  and two numbers and then calls one of the above 
  functions on the numbers.*/
 
-function operate(numbOne, operator, numbTwo) {
-  return operator(numbOne, numbTwo);
-  // return operator(numbOne, numbTwo);
-}
-
-console.log(operate(5, multi, 2));
+console.log(operate(firstValue, multi, 2));
 /* Create the functions that update one of your number variables when the calculator’s
  digit buttons are clicked. Your calculator’s display should also update
  to reflect the value of that number variable.*/
 
 // Calculator Logic
-const container = document.querySelector(".container");
-// const btns = document.querySelectorAll("button");
-const calDisplay = document.querySelector(".display");
-const numDigit = document.querySelectorAll(".num");
-// const btnOperations = document.querySelectorAll("button");
-const operatorSUM = document.querySelector(".add");
 
+const numBtn = document.querySelectorAll("button");
+const clearBtn = document.querySelector(".clear");
+const calDisplay = document.getElementById("display");
+const addBtn = document.querySelector(".add");
 const equal = document.querySelector(".equal");
 
-let firstValue = 0;
-let SecondValue = 0;
-
-numDigit.forEach((num) => {
-  num.addEventListener("click", () => {
-    (num.id, (calDisplay.textContent = `${num.id}`));
-  });
+numBtn.forEach((button) => {
+  button.addEventListener(
+    "click",
+    () => (
+      button.id,
+      (calDisplay.value += `${button.id}`),
+      (firstValue += `${button.id}`)
+    ),
+  );
 });
 
-equal.addEventListener("click", () => {
-  operate(firstValue, SecondValue);
-});
+clearBtn.addEventListener("click", () => (calDisplay.value = ""));
+
+addBtn.addEventListener(
+  "click",
+  () => (operator = add),
+  (calDisplay.value = ""),
+);
 
 /*Make the calculator work! You’ll need to store the first and second numbers input 
 by the user and then operate() on them when the user presses the = button, 
