@@ -33,6 +33,11 @@ const div = function (num1, num2) {
   }
   return num1 / num2;
 };
+
+const percent = function (num1, num2) {
+  return (num1 * num2) / 100;
+};
+
 function operate(numbOne, operator, numbTwo) {
   return operator(numbOne, numbTwo);
 }
@@ -41,65 +46,23 @@ function operate(numbOne, operator, numbTwo) {
  and two numbers and then calls one of the above 
  functions on the numbers.*/
 
-console.log(operate(5, multi, 2));
+// console.log(operate(5, multi, 2));
 /* Create the functions that update one of your number variables when the calculator’s
  digit buttons are clicked. Your calculator’s display should also update
  to reflect the value of that number variable.*/
 
-// Calculator Logic
+// Logic Calculator
 
 const numBtn = document.querySelectorAll("button");
 const clearBtn = document.querySelector(".clear");
 const calDisplay = document.getElementById("display");
 const addBtn = document.querySelector(".add");
 const equalBtn = document.querySelector(".equal");
-
-// numBtn.forEach((button) => {
-//   button.addEventListener("click", () => {
-//     firstValue += button.id;
-//     calDisplay.value = firstValue;
-//   });
-// });
-
-// clearBtn.addEventListener("click", () => (calDisplay.value = ""));
-
-// addBtn.addEventListener("click", () => (varOperator = add));
-
-numBtn.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (varOperator === "") {
-      firstValue += button.id;
-      calDisplay.value = firstValue;
-    } else {
-      secondValue += button.id;
-      calDisplay.value = secondValue;
-    }
-  });
-});
-
-clearBtn.addEventListener("click", () => {
-  firstValue = "";
-  secondValue = "";
-  varOperator = "";
-  calDisplay.value = "";
-});
-
-addBtn.addEventListener("click", () => {
-  varOperator = add;
-});
-
-equalBtn.addEventListener("click", () => {
-  if (firstValue !== "" && secondValue !== "" && varOperator) {
-    let num1 = parseFloat(firstValue);
-    let num2 = parseFloat(secondValue);
-    result = operate(num1, varOperator, num2);
-    calDisplay.value = result;
-    // Reset for next calculation
-    firstValue = result.toString();
-    secondValue = "";
-    varOperator = "";
-  }
-});
+const subtractBtn = document.querySelector(".subtract");
+const backBtn = document.querySelector(".backspace");
+const multiply = document.querySelector(".multiply");
+const divBtn = document.querySelector(".div");
+const percentBnt = document.querySelector(".percent");
 
 // equalBtn.addEventListener("click", () => operate(firstValue, varOperator, 10));
 
@@ -112,3 +75,82 @@ so once operate has been called, update the display with the result of the opera
 This is the hardest part of the project. 
 You need to figure out how to store all the values and 
 call the operate function with them. Don’t feel bad if it takes you a while to figure out the logic.*/
+numBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (varOperator === "") {
+      firstValue += button.id;
+      calDisplay.value = firstValue;
+    } else {
+      secondValue += button.id;
+      calDisplay.value = secondValue;
+    }
+  });
+});
+
+function selectOperator(operator) {
+  if (firstValue !== "" && secondValue !== "") {
+    result = operate(
+      parseFloat(firstValue),
+      varOperator,
+      parseFloat(secondValue),
+    );
+
+    firstValue = result.toString();
+    secondValue = "";
+    calDisplay.value = firstValue;
+  }
+
+  varOperator = operator;
+}
+
+addBtn.addEventListener("click", () => {
+  selectOperator(add);
+});
+
+subtractBtn.addEventListener("click", () => {
+  selectOperator(subtract);
+});
+
+multiply.addEventListener("click", () => {
+  selectOperator(multi);
+});
+
+percentBnt.addEventListener("click", () => {
+  selectOperator(percent);
+});
+divBtn.addEventListener("click", () => {
+  selectOperator(div);
+});
+
+equalBtn.addEventListener("click", () => {
+  if (firstValue !== "" && secondValue !== "" && varOperator) {
+    result = operate(
+      parseFloat(firstValue),
+      varOperator,
+      parseFloat(secondValue),
+    );
+
+    calDisplay.value = result;
+
+    firstValue = result.toString();
+    secondValue = "";
+    varOperator = "";
+  }
+});
+
+clearBtn.addEventListener("click", () => {
+  firstValue = "";
+  secondValue = "";
+  varOperator = "";
+  calDisplay.value = "";
+});
+
+backBtn.addEventListener("click", () => {
+  if (varOperator === "") {
+    firstValue = firstValue.slice(0, -1);
+    calDisplay.value = firstValue;
+  } else {
+    secondValue = secondValue.slice(0, -1);
+    calDisplay.value = secondValue;
+  }
+});
