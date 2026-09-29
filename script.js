@@ -37,6 +37,9 @@ const div = function (num1, num2) {
 const percent = function (num1, num2) {
   return (num1 * num2) / 100;
 };
+const plusMinus = function (num1, num2) {
+  return num1 * -1;
+};
 
 function operate(numbOne, operator, numbTwo) {
   return operator(numbOne, numbTwo);
@@ -63,7 +66,7 @@ const backBtn = document.querySelector(".backspace");
 const multiply = document.querySelector(".multiply");
 const divBtn = document.querySelector(".div");
 const percentBnt = document.querySelector(".percent");
-
+const plusMinusBtn = document.querySelector(".plusMinus");
 // equalBtn.addEventListener("click", () => operate(firstValue, varOperator, 10));
 
 /*Make the calculator work! You’ll need to store the first and second numbers input 
@@ -94,7 +97,7 @@ function selectOperator(operator) {
       varOperator,
       parseFloat(secondValue),
     );
-
+    // Reset first value
     firstValue = result.toString();
     secondValue = "";
     calDisplay.value = firstValue;
@@ -102,6 +105,8 @@ function selectOperator(operator) {
 
   varOperator = operator;
 }
+
+//Group of btn methods
 
 addBtn.addEventListener("click", () => {
   selectOperator(add);
@@ -121,6 +126,11 @@ percentBnt.addEventListener("click", () => {
 divBtn.addEventListener("click", () => {
   selectOperator(div);
 });
+plusMinusBtn.addEventListener("click", () => {
+  selectOperator(plusMinus);
+});
+
+// end btn
 
 equalBtn.addEventListener("click", () => {
   if (firstValue !== "" && secondValue !== "" && varOperator) {
@@ -154,3 +164,5 @@ backBtn.addEventListener("click", () => {
     calDisplay.value = secondValue;
   }
 });
+
+// DONE!!!!! 100% no AI, guys. This project was really challenging, but every minute was worth it.

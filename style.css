@@ -41,6 +41,15 @@ button {
   background-color: hsl(0, 0%, 50%);
 }
 
+button:hover {
+  background-color: hsl(0, 0%, 40%);
+}
+
+.container {
+  background-color: hsl(193, 6%, 84%);
+  border-radius: 10%;
+}
+
 .btns {
   display: flex;
   gap: inherit;
@@ -49,4 +58,38 @@ button {
   width: 100%;
   padding: 20px;
   border-radius: 15px;
+}
+.multiply {
+  background-color: hsl(39, 100%, 50%);
+}
+.multiply:hover {
+  background-color: hsl(39, 50%, 50%);
+}
+
+.add {
+  background-color: hsl(39, 100%, 50%);
+}
+.add:hover {
+  background-color: hsl(39, 50%, 50%);
+}
+
+.subtract {
+  background-color: hsl(39, 100%, 50%);
+}
+.subtract:hover {
+  background-color: hsl(39, 50%, 50%);
+}
+
+.div {
+  background-color: hsl(39, 100%, 50%);
+}
+.div:hover {
+  background-color: hsl(39, 50%, 50%);
+}
+
+.equal {
+  background-color: hsl(39, 100%, 50%);
+}
+.equal:hover {
+  background-color: hsl(39, 50%, 50%);
 }
